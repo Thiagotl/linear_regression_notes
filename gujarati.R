@@ -3,7 +3,8 @@
 #devtools::install_github('https://github.com/brunoruas2/gujarati')
 library(gujarati)
 library(tidyverse)
-library(gtools)
+library(easystats)
+#library(gtools)
 
 d1<-Table1_1
 glimpse(d1)
@@ -38,4 +39,23 @@ d4<-bind_rows(d2,d3)
 
 
 plot(d4$Y1,d4$X1)
+attach(d4)
 
+#Y1-Milhoes de ovos produzidos
+#X1-Preço do ovo
+
+# preco = 82,47 - 0,0039 * producao + residuos
+modelo1<-lm(X1~Y1, data = d4)
+
+summary(modelo1)
+
+model_performance(modelo1)
+check_model(modelo1)
+par(mfrow=c(2,2))
+
+plot(modelo1)
+# Teste de Normalidade dos resíduos 
+# H0: os resíduos seguem distribuição normal. P-value > 0.05
+shapiro.test(modelo1$residuals)
+'''O teste de shapiro indicou que os resíduos não seguem uma
+distribuição normal'''
