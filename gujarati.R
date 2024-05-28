@@ -59,3 +59,6 @@ plot(modelo1)
 shapiro.test(modelo1$residuals)
 '''O teste de shapiro indicou que os resíduos não seguem uma
 distribuição normal'''
+
+
+# TESTE PARA COMMIT
